@@ -4,7 +4,7 @@
   x = 25,
   y = 25,
   y_min = 25,
-  y_max = 575,
+  y_max = 550,
   frame = 1,
   frames =
     {
@@ -18,18 +18,16 @@ function player:draw()
 end
 
 function player:update(dt)
-  if self.frame < #self.frames then
-    self.frame = self.frame + 1
-  else
-    self.frame = 1
+  if love.keyboard.isDown('a') and self.y > self.y_min then
+    self.y = self.y - 1
+  elseif love.keyboard.isDown('z') and self.y < self.y_max then
+    self.y = self.y + 1
   end
+  
 end
 
 
 function love.load(arg)
-  
-
-
 missle = {}
 missles = {}
 enemy = {}
@@ -38,32 +36,15 @@ end
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+function love.update()
+  if love.keyboard.isDown('escape') then
+    love.event.quit()
+  end
+  
+  player:update()
+  
+end
 
 function love.draw()
   player:draw()
 end
-
-function love.update()
-  player:update()
-end
-
